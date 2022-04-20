@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm
 from .models import Employee
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .serializers import EmployeeSerializer
 
 # Create your views here.
 def employee_list(request):
@@ -30,6 +35,15 @@ def employee_form(request, id=0):  #for create and update employee
 
 
 
-def employee_delete(request):
+def employee_delete(request, id):
+    employee = Employee.objects.get(pk=id)
+    employee.delete()
+    return redirect('/employee/list')
+
+class EmployeeListView(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
     
-    return
+employee_list_api = EmployeeListView.as_view()
+    
+    
