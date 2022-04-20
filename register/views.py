@@ -40,6 +40,7 @@ def employee_delete(request, id):
     employee.delete()
     return redirect('/employee/list')
 
+# API VIEWS
 class EmployeeListView(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
