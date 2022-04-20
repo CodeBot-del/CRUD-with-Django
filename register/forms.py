@@ -6,4 +6,11 @@ class EmployeeForm(forms.ModelForm):
         model = Employee
         # fields = '__all__' #get all the fields from model
         fields = ('fullname', 'mobile', 'emp_code', 'position')
+        labels = {
+            'fullname': 'Full Name',
+            'emp_code': 'EMP. code'
+        }
         
+    def __init__(self, *args, **kwargs):
+        super(EmployeeForm,self).__init__(*args, **kwargs)
+        self.fields['position'].empty_label = "Select"

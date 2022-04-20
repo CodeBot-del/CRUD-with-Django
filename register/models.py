@@ -7,6 +7,9 @@ from django.db import models
 # table position 
 class Position(models.Model):
     title = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.title
 
 # table employee
 class Employee(models.Model):
