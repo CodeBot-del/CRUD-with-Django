@@ -15,7 +15,7 @@ def employee_form(request, id=0):  #for create and update employee
         if id == 0:
             form = EmployeeForm()
         else:
-            employee = Employee.objects.get(pk=id)
+            employee = Employee.objects.get(pk=id) #get the corresponding id to update
         return render(request, "register/employee_form.html", {'form': form})
     else:
         form = EmployeeForm(request.POST)
