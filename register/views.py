@@ -44,6 +44,15 @@ class EmployeeListView(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     
-employee_list_api = EmployeeListView.as_view()
+    def perform_create(self, serializer):
+        fullname = serializer.validated_data.get('fullname')
+        mobile = serializer.validated_data.get('mobile')
+        position = serializer.validated_data.get('position')
+        
+        Employee.objects.create(fullname=fullname, mobile=mobile, position=position)
+    
+    
+    
+employee_list_create_api = EmployeeListView.as_view()
     
     
