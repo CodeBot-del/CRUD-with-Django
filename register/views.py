@@ -55,5 +55,17 @@ class EmployeeListView(generics.ListCreateAPIView):
     
     
 employee_list_create_api = EmployeeListView.as_view()
+
+# product delete API View
+class EmployeeDeleteAPIView(generics.DestroyAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+    lookup_field = 'pk'
+    
+    def perform_destroy(self, instance):
+        # instance
+        super().perform_destroy(instance)
+    
+employee_destroy_api = EmployeeDeleteAPIView.as_view()
     
     
