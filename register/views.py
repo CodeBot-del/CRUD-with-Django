@@ -41,6 +41,7 @@ def employee_delete(request, id):
     return redirect('/employee/list')
 
 # API VIEWS
+# list and create API view
 class EmployeeListView(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -56,7 +57,7 @@ class EmployeeListView(generics.ListCreateAPIView):
     
 employee_list_create_api = EmployeeListView.as_view()
 
-# product delete API View
+# employee delete API View
 class EmployeeDeleteAPIView(generics.DestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -67,5 +68,16 @@ class EmployeeDeleteAPIView(generics.DestroyAPIView):
         super().perform_destroy(instance)
     
 employee_destroy_api = EmployeeDeleteAPIView.as_view()
+
+# Employee update API View
+class EmployeeUpdateAPIView(generics.UpdateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+    lookup_field = 'pk'
     
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        
+    
+employee_update_api = EmployeeUpdateAPIView.as_view()
     

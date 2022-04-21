@@ -8,4 +8,5 @@ urlpatterns = [
     path('list/', views.employee_list, name="employee_list"), #get req. to retrieve and display the records
     path('api/list/', views.employee_list_create_api),
     path('api/<int:pk>/delete/', views.employee_destroy_api),
+    path('api/<int:pk>/update/', views.employee_update_api), 
 ]
